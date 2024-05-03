@@ -2,7 +2,8 @@ Digital money transaction become available almost everywhere, however, depending
 
 project title "Restful API Service for Money Transactions of a Virtual Currency"
 
-project done by mohammed taqi hassan mahdi Supervised By :Dr. Salem A. Mohammed Ali
+project done by mohammed taqi hassan mahdi
+Supervised By :Dr. Salem A. Mohammed Ali
 
 tools used 
 2.1	Ubuntu Linux server LTS
