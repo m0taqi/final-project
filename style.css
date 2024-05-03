@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(back.gif);
+    background-size: cover;
+    color: #E2F4C5;
+    
+
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #496989;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+}
+
+h2 {
+    color: #496989;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+p {size: 20px;
+    font-size: larger;
+    margin: 10px 0;
+    color: #496989;
+    margin: 5px;
+}
+
+table {color:#496989;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+th, td {
+    border: 1px solid #496989;
+    padding: 12px;
+    text-align: left;
+    font-size: 25px;
+}
+
+th {background-color: #58A399;
+    color: #496989;
+    font-size: 25px;
+}
+a{
+    color: #A8CD9F;
+    margin-right: 15px;
+}
+input{
+    display: inline-block;
+    float:inline-end;
+}
+
+
+
+
+button {
+  --b: 5px;   /* border thickness */
+  --s: .45em; /* size of the corner */
+  --color: #58A399;
+  
+  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+  color: var(--color);
+  --_p: var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition: .3s linear, color 0s, background-color 0s;
+  outline: var(--b) solid #0000;
+  outline-offset: .6em;
+  font-size: 25px;
+
+  border: 0;
+
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+button:hover,
+button:focus-visible{
+  --_p: 0px;
+  outline-color: var(--color);
+  outline-offset: .05em;
+}
+
+button:active {
+  background: var(--color);
+  color: #fff;
+}

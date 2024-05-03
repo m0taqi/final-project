@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <div>
+        <h2>User Dashboard</h2>
+        
+        <?php
+        include("db.php");
+        session_start();
+
+        if (isset($_SESSION["user_id"])) {
+            $user_id = $_SESSION["user_id"];
+
+            // Fetch user information and transaction history
+            $user_sql = "SELECT * FROM users WHERE id = $user_id";
+            $user_result = $conn->query($user_sql);
+            $user = $user_result->fetch_assoc();
+
+            $transaction_sql = "SELECT * FROM transactions WHERE sender_id = $user_id OR receiver_id = $user_id ORDER BY transaction_date DESC";
+            $transaction_result = $conn->query($transaction_sql);
+        } else {
+            header("Location: signin.php");
+            exit();
+        }
+        ?>
+
+        <p><strong>Username:</strong> <?php echo $user["username"]; ?></p>
+        <p><strong>NFC Card:</strong> <?php echo $user["nfc_card"]; ?></p>
+        <p><strong>Current Balance:</strong> $<?php echo number_format($user["balance"], 2); ?></p>
+
+        <h3>Transaction History</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Sender</th>
+                    <th>Receiver</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                while ($row = $transaction_result->fetch_assoc()) {
+                    $sender_id = $row["sender_id"];
+                    $receiver_id = $row["receiver_id"];
+
+                    $sender_sql = "SELECT username FROM users WHERE id = $sender_id";
+                    $receiver_sql = "SELECT username FROM users WHERE id = $receiver_id";
+
+                    $sender_result = $conn->query($sender_sql);
+                    $receiver_result = $conn->query($receiver_sql);
+
+                    $sender_username = ($sender_result->num_rows > 0) ? $sender_result->fetch_assoc()["username"] : "Unknown";
+                    $receiver_username = ($receiver_result->num_rows > 0) ? $receiver_result->fetch_assoc()["username"] : "Unknown";
+
+                    echo "<tr>";
+                    echo "<td>" . $row["transaction_date"] . "</td>";
+                    echo "<td>" . $sender_username . "</td>";
+                    echo "<td>" . $receiver_username . "</td>";
+                    echo "<td>$" . number_format($row["amount"], 2) . "</td>";
+                    echo "</tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
